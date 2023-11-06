@@ -18,7 +18,7 @@ task:
 
   matrix:
     - name: Example Task
-      only_if: $BRANCH == "master"
+      only_if: $BRANCH == "main"
       test_script:
         - nix run .#test-e2e-example
 
