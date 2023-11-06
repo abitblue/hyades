@@ -20,5 +20,5 @@ task:
     - name: Example Task
       only_if: $BRANCH == "main"
       test_script:
-        - nix run .#test-e2e-example
+        - nix --extra-experimental-features 'flakes nix-command' run .#test-e2e-example
 
