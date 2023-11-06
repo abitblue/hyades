@@ -1,0 +1,20 @@
+name: Example
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v23
+        with:
+          extra_nix_config: "system-features = nixos-test benchmark big-parallel kvm"
+          nix_path: nixpkgs=channel:nixos-unstable
+      - name: Integration Test
+        run: nix --print-build-logs run --verbose .#test-e2e-example 
