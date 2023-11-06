@@ -2,7 +2,7 @@ task:
   timeout_in: 120m
   
   container:
-    image: nixpkgs/nix-flakes:nixos-unstable
+    image: nixpkgs/nix-flakes:latest
     kvm: true
     cpu: 4
     memory: 8G
@@ -20,5 +20,6 @@ task:
     - name: Example Task
       only_if: $BRANCH == "main"
       test_script:
-        - nix --extra-experimental-features 'flakes nix-command' run .#test-e2e-example
+        - nix run nixpkgs#nix-info -- -m
+        - nix run .#test-e2e-example
 
