@@ -1,0 +1,24 @@
+task:
+  timeout_in: 120m
+  
+  container:
+    image: nixpkgs/nix-flakes:nixos-unstable
+    kvm: true
+    cpu: 4
+    memory: 8G
+
+  # compute_engine_instance:
+  #   image_project: ubuntu-os-cloud
+  #   image_family: family/ubuntu-2204-lts
+  #   platform: linux
+  #   architecture: amd64
+  #   cpu: 4
+  #   memory: 16G
+  #   nested_virtualization: true
+
+  matrix:
+    - name: Example Task
+      only_if: $BRANCH == "master"
+      test_script:
+        - nix run .#test-e2e-example
+
