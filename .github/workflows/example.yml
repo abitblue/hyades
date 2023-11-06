@@ -9,13 +9,13 @@ on:
 
 jobs:
   build:
-    runs-on: macos-12
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: cachix/install-nix-action@v23
         with:
           #extra_nix_config: "system-features = nixos-test benchmark big-parallel kvm"
           nix_path: nixpkgs=channel:nixos-unstable
-      #- uses: DeterminateSystems/magic-nix-cache-action@v2
+      - uses: DeterminateSystems/magic-nix-cache-action@v2
       - name: Integration Test
         run: nix run .#test-e2e-example
