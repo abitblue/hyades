@@ -19,7 +19,8 @@ task:
   matrix:
     - name: Example Task
       only_if: $BRANCH == "main"
+      nix_store_cache:
+        folder: /nix/store
       test_script:
-        - nix run nixpkgs#nix-info -- -m
         - nix run .#test-e2e-example
 
